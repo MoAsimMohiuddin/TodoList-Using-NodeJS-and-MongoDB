@@ -52,7 +52,7 @@ async function findTodayTasks() {
     });
 
     const model=mongoose.models.todaysTasks || mongoose.model('todaysTasks', todaySchema);
-    const tasks=await model.find();
+    const tasks=await model.find({}, {task:1, _id:0});
 
     return tasks;
 }
@@ -63,7 +63,7 @@ async function findWorkTasks() {
     });
 
     const model=mongoose.models.workTasks || mongoose.model('workTasks', workSchema);
-    const works=await model.find();
+    const works=await model.find({}, {task:1, _id:0});
 
     return works;
 }
@@ -79,9 +79,6 @@ app.get("/", (req, res)=>{
 
     findTodayTasks().then((tasks)=>{
         todayTasks=tasks;
-        // console.log("Today Tasks Before updating");
-        // console.log(todayTasks);
-        todayTasks=updateTasks(todayTasks);
 
         res.render(__dirname+"/views/today.ejs", 
         {
@@ -104,10 +101,6 @@ app.get("/work", (req, res)=>{
 
     findWorkTasks().then((tasks)=>{
         workTasks=tasks;
-        // console.log("Today Tasks Before updating");
-        // console.log(todayTasks);
-        workTasks=updateTasks(workTasks);
-
         res.render(__dirname+"/views/work.ejs", 
         {
             workArray: workTasks,
@@ -124,7 +117,6 @@ app.post("/", (req, res)=>{
     });
     const model=mongoose.models.todaysTasks || mongoose.model('todaysTasks', todaySchema);
     if(req.body.task!=""){
-        // tasks.add(req.body.task);
         addTaskToTodayList(req.body.task);
     }
 
@@ -132,9 +124,6 @@ app.post("/", (req, res)=>{
 
     findTodayTasks().then((tasks)=>{
         todayTasks=tasks;
-        // console.log("Today Tasks Before updating");
-        // console.log(todayTasks);
-        todayTasks=updateTasks(todayTasks);
 
         res.render(__dirname+"/views/today.ejs", 
         {
@@ -152,7 +141,6 @@ app.post("/work", (req, res)=>{
     });
     const model=mongoose.models.workTasks || mongoose.model('workTasks', workSchema);
     if(req.body.work!=""){
-        // tasks.add(req.body.task);
         addTaskToWorkList(req.body.work);
     }
 
@@ -160,9 +148,6 @@ app.post("/work", (req, res)=>{
 
     findWorkTasks().then((tasks)=>{
         workTasks=tasks;
-        // console.log("Today Tasks Before updating");
-        // console.log(todayTasks);
-        workTasks=updateTasks(workTasks);
 
         res.render(__dirname+"/views/work.ejs", 
         {
@@ -173,32 +158,6 @@ app.post("/work", (req, res)=>{
         });
     })
 })
-
-function updateTasks(tasks) {
-    let newList=[];
-
-    // console.log("Today Tasks In function");
-    // console.log(todayTaskss);
-    tasks.forEach((value)=>{
-        let newObj={};
-
-        newObj.task=value.task;
-
-        newList.push(newObj);
-    });
-
-    // for(let value of todayTaskss) {
-    //     let newObj={};
-    //     newObj.task=value.task;
-
-    //     newList.push(newObj);
-    // }
-
-    // console.log("New List");
-    // console.log(newList);
-
-    return newList;
-}
 
 app.listen(3000, ()=>{
     console.log("Listening on Port 3000")
