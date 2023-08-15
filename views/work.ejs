@@ -6,27 +6,29 @@
 </head>
 <body>
     <header class="nav-bar">
-        <a class="route" href="/">Today</a>
-        <a class="route" href="/work">Work</a>
+        <a class="route today-route" href="/">Today</a>
+        <a class="route work-route" href="/work">Work</a>
     </header>
     <div class="dateBox">
         <p><em class="dateText"><%=day%>, <%=month%> <%=date%></em></p>
     </div>
-    <%if(locals.workArray){%>
-        <%if(workArray.length!=0){%>
-            <%workArray.forEach(function(value){%>
-                <div class="taskList">
-                    <div class="addedTask">
-                        <label class="taskDiv"><%=value.task%></label>
-                        <input class="cb" type="checkbox" name="" id="">
+    <div class="whole-container">
+        <%if(locals.workArray){%>
+            <%if(workArray.length!=0){%>
+                <%workArray.forEach(function(value){%>
+                    <div class="taskList">
+                        <div class="addedTask">
+                            <label class="taskDiv"><%=value.task%></label>
+                            <input class="cb" type="checkbox" name="" id="">
+                        </div>
                     </div>
-                </div>
-            <%})%>
+                <%})%>
+            <%}%>
         <%}%>
-    <%}%>
-    <form action="/work" class="taskForm" method="post">
-        <input class="textBox" name="work" type="text" placeholder="Add a New Task For Work">
-        <input class="button" type="submit" value="+">
-    </form>
+        <form action="/work" class="taskForm" method="post">
+            <input class="textBox" name="work" type="text" placeholder="Add a New Task For Work">
+            <input class="button" type="submit" value="+">
+        </form>
+    </div>
 </body>
 </html>
