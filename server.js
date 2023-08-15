@@ -80,7 +80,7 @@ app.get("/", (req, res)=>{
     findTodayTasks().then((tasks)=>{
         todayTasks=tasks;
 
-        res.render(__dirname+"/views/today.ejs", 
+        res.render(__dirname+"/views/index.ejs", 
         {
             taskArray: todayTasks,
             day:corrDay,
