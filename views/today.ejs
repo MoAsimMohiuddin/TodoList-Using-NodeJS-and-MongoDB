@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="/styles/style.css">
+    <title>Todo List</title>
+</head>
+<body>
+    <header class="nav-bar">
+        <a class="route" href="/">Today</a>
+        <a class="route" href="/work">Work</a>
+    </header>
+    <div class="dateBox">
+        <p><em class="dateText"><%=day%>, <%=month%> <%=date%></em></p>
+    </div>
+    <%if(locals.taskArray){%>
+        <%if(taskArray.length!=0){%>
+            <%taskArray.forEach(function(value){%>
+                <div class="taskList">
+                    <div class="addedTask">
+                        <label class="taskDiv"><%=value.task%></label>
+                        <input class="cb" id="cb" type="checkbox" onclick="myFunction()">
+                    </div>
+                </div>
+            <%})%>
+        <%}%>
+    <%}%>
+    <form action="/" class="taskForm" method="post">
+        <input class="textBox" name="task" type="text" placeholder="Add a New Task For Today">
+        <input class="button" type="submit" value="+">
+    </form>
+    <script src="/main.js"></script>
+</body>
+</html>
