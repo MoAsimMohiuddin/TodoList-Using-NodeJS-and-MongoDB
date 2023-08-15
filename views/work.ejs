@@ -18,8 +18,10 @@
                 <%workArray.forEach(function(value){%>
                     <div class="taskList">
                         <div class="addedTask">
-                            <label class="taskDiv"><%=value.task%></label>
-                            <input class="cb" type="checkbox" name="" id="">
+                            <form id="check-box-form" action="/deleteWork" method="post">
+                                <%=value.task%>
+                                <input class="cb" id="cb" type="checkbox" name="checkbox" value=<%=value._id%> onChange="document.getElementById('check-box-form').submit()">
+                            </form>
                         </div>
                     </div>
                 <%})%>

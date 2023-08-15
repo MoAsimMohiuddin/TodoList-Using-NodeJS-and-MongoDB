@@ -19,8 +19,10 @@
                 <%taskArray.forEach(function(value){%>
                     <div class="taskList">
                         <div class="addedTask">
-                            <label class="taskDiv"><%=value.task%></label>
-                            <input class="cb" id="cb" type="checkbox" onclick="myFunction()">
+                            <form id="check-box-form" action="/delete" method="post">
+                                <%=value.task%>
+                                <input class="cb" id="cb" type="checkbox" name="checkbox" value=<%=value._id%> onChange="this.form.submit()">
+                            </form>
                         </div>
                     </div>
                 <%})%>

@@ -38,9 +38,10 @@ body{
     overflow: auto;
 }
 .cb{
-    width: 20px;
-    height: 20px;
-    text-decoration: line-through;
+    /* width: 20px;
+    height: 17px; */
+    margin-left: 5px;
+    transform : scale(1.7);
 }
 
 .cb-thorugh-text{
@@ -53,9 +54,7 @@ body{
     display: flex;
     justify-content:space-around;
 }
-.route{
 
-}
 .taskList{
     margin-left: 24%;
 }
